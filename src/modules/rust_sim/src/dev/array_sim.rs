@@ -1,0 +1,69 @@
+// Discrete Event Sim
+use std::time::Instant;
+use ndarray::prelude::*;
+use ndarray_rand::rand::{thread_rng, seq::IteratorRandom};
+use cute;
+
+pub fn arr_model(states: Vec<u64>, probs: Vec<f64>, n_steps:usize,) {
+    // initialise sampling
+    let mut rng = thread_rng(); 
+
+    // base matrix
+    let mut arr: ndarray::ArrayBase<ndarray::OwnedRepr<u64>, ndarray::Dim<[usize; 2]>> = Array::default((states.len(), n_steps + 1));
+    
+    // insert base states
+    for mut pair in arr.axis_iter_mut(Axis(0)).enumerate() {
+        pair.1[0] = states[pair.0]; 
+    }
+
+    // Run sim
+    // if prob @ age > prob @ rand then set next val as age + 1 else 0 
+    for (row, mut iter_row) in &mut arr.axis_iter_mut(Axis(0)).enumerate() {
+        for (col, val) in &mut iter_row.iter().enumerate() {
+            if col > 0 && Some(probs[*val as usize]) >= probs.iter().choose(&mut rng).copied()  {
+                iter_row[col] = *val + 1
+            }
+        }
+    }
+    println!("{:?}", arr);
+
+    
+    // state_mat = cute::c![
+    //     cute::c![
+    //         if i > 0 && Some(probs[arr[i] as usize]) >= probs.iter().choose(&mut rng).copied() {arr[i] + 1 
+    //         } else {0 as u64}, for i in 0..(n_steps + 1)],
+    //         for arr in state_mat];
+    
+    // return state_mat.unwrap(); 
+}
+
+pub fn main() {
+    // Sim scale
+    let n_steps = 30;
+    let n_iters = 5;
+    
+    // Survival array
+    let probs = vec![1.0, 0.95, 0.96, 0.95, 0.93, 0.92, 0.9, 
+                                0.88, 0.85, 0.82, 0.8, 0.75, 0.72, 0.7, 
+                                0.68, 0.65, 0.6, 0.55, 0.5, 0.45, 0.4, 
+                                0.38, 0.25, 0.1, 0.08, 0.05, 0.01,];
+    
+    // Initial states
+    let mut rng = thread_rng();
+    let tmp = vec![2,2,3,4,3,2,4,5,7,8,6,5,3,2,2,4,5,6,7,5,3,2,4,6,6,7];
+    
+    let states = cute::c!(tmp.iter().choose(&mut rng).copied().unwrap() , 
+                                    for _i in 0..10 as u64);
+    
+    // Run sim
+    let timer = Instant::now();
+    
+    let res = arr_model(states, probs, n_steps);
+    // cute::c![arr_model(states.clone(), probs.clone(), n_steps), for _i in 0..n_iters];
+    let run_time = timer.elapsed(); 
+    
+    // println!("{:?}", res);
+    
+    println!("Execution completed in {:.2?}", run_time);
+    return res
+}

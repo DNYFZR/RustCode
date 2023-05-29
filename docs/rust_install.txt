@@ -1,0 +1,125 @@
+Rust Visual C++ prerequisites
+
+Rust requires a linker and Windows API libraries but they don't seem to be
+available.
+
+These components can be acquired through a Visual Studio installer.
+
+1) Quick install via the Visual Studio Community installer
+   (free for individuals, academic uses, and open source).
+
+2) Manually install the prerequisites
+   (for enterprise and advanced users).
+
+3) Don't install the prerequisites
+   (if you're targetting the GNU ABI).
+
+>2
+
+
+You can acquire the build tools by installing Microsoft
+Visual C++ Build Tools 2019 which provides just the Visual C++ build
+tools:
+
+  https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
+Check its box for "Desktop development with C++" which will ensure that
+the Windows 10 SDK is selected.  If your locale language is not English,
+then additionally check the box for English under Language packs.
+Or minimally, use the tab "Individual Components" and select these items:
+
+  "MSVC - VS 2019 C++ x64/x86 build tools"
+  and
+  "Windows 10 SDK"
+
+Alternately, you can install Visual Studio 2019, Visual Studio 2017,
+Visual Studio 2015, or Visual Studio 2013 and during install select
+the "C++ tools":
+
+  https://visualstudio.microsoft.com/downloads/
+
+Install the C++ build tools before proceeding.
+
+If you will be targeting the GNU ABI or otherwise know what you are
+doing then it is fine to continue installation without the build
+tools, but otherwise, install the C++ build tools before proceeding.
+
+Continue? (y/N)
+y
+
+
+Welcome to Rust!
+
+This will download and install the official compiler for the Rust
+programming language, and its package manager, Cargo.
+
+Rustup metadata and toolchains will be installed into the Rustup
+home directory, located at:
+
+  C:\Users\Daniel\.rustup
+
+This can be modified with the RUSTUP_HOME environment variable.
+
+The Cargo home directory is located at:
+
+  C:\Users\Daniel\.cargo
+
+This can be modified with the CARGO_HOME environment variable.
+
+The cargo, rustc, rustup and other commands will be added to
+Cargo's bin directory, located at:
+
+  C:\Users\Daniel\.cargo\bin
+
+This path will then be added to your PATH environment variable by
+modifying the HKEY_CURRENT_USER/Environment/PATH registry key.
+
+You can uninstall at any time with rustup self uninstall and
+these changes will be reverted.
+
+Current installation options:
+
+
+   default host triple: x86_64-pc-windows-msvc
+     default toolchain: stable (default)
+               profile: default
+  modify PATH variable: yes
+
+1) Proceed with installation (default)
+2) Customize installation
+3) Cancel installation
+>1
+
+info: profile set to 'default'
+info: default host triple is x86_64-pc-windows-msvc
+info: syncing channel updates for 'stable-x86_64-pc-windows-msvc'
+info: latest update on 2023-02-09, rust version 1.67.1 (d5a82bbd2 2023-02-07)
+info: downloading component 'cargo'
+info: downloading component 'clippy'
+info: downloading component 'rust-docs'
+info: downloading component 'rust-std'
+ 26.8 MiB /  26.8 MiB (100 %)  23.4 MiB/s in  1s ETA:  0s
+info: downloading component 'rustc'
+ 62.5 MiB /  62.5 MiB (100 %)  30.8 MiB/s in  2s ETA:  0s
+info: downloading component 'rustfmt'
+info: installing component 'cargo'
+info: installing component 'clippy'
+info: installing component 'rust-docs'
+ 19.3 MiB /  19.3 MiB (100 %)   1.9 MiB/s in  8s ETA:  0s
+info: installing component 'rust-std'
+ 26.8 MiB /  26.8 MiB (100 %)   8.6 MiB/s in  3s ETA:  0s
+info: installing component 'rustc'
+ 62.5 MiB /  62.5 MiB (100 %)  10.6 MiB/s in  6s ETA:  0s
+info: installing component 'rustfmt'
+info: default toolchain set to 'stable-x86_64-pc-windows-msvc'
+
+  stable-x86_64-pc-windows-msvc installed - rustc 1.67.1 (d5a82bbd2 2023-02-07)
+
+
+Rust is installed now. Great!
+
+To get started you may need to restart your current shell.
+This would reload its PATH environment variable to include
+Cargo's bin directory (%USERPROFILE%\.cargo\bin).
+
+Press the Enter key to continue.
