@@ -1,28 +1,8 @@
-// Rust by Example Study Code
-
-// Algorithms - random numbers
+// Algorithms - random numbers (Rust by Example)
 
 use rand::Rng;
 
-fn main () {
-    // Uniform numeric
-    random_values();
-    random_dist();
-
-    // Non-uniform dist's
-    for _i in 1..3{
-        weibull_dist().unwrap();
-    }
-
-    // Mixed type
-    random_tuple();
-
-    // Character methods
-    random_string(30);
-    random_password(20);
-}
-
-fn random_values() {
+pub fn random_values() {
     let mut rng = rand::thread_rng();
 
     let n1: u8 = rng.gen();
@@ -38,7 +18,7 @@ fn random_values() {
 // Distributions
 use rand::distributions::{Distribution, Uniform};
 
-fn random_dist() {
+pub fn random_dist() {
     let mut rng = rand::thread_rng();
     let die = Uniform::from(1..7);
 
@@ -55,7 +35,7 @@ fn random_dist() {
 // Non-uniform 
 use rand_distr::{Weibull, WeibullError};
 
-fn weibull_dist() -> Result<(), WeibullError> {
+pub fn weibull_dist() -> Result<(), WeibullError> {
     let mut rng = rand::thread_rng();
     
     let normal = Weibull::new(25.0, 3.0)?;
@@ -69,7 +49,7 @@ fn weibull_dist() -> Result<(), WeibullError> {
 use rand::distributions::Standard;
 
 #[derive(Debug)]
-struct Point {
+pub struct Point {
     x: i32, 
     y: i32,
 }
@@ -81,7 +61,7 @@ impl Distribution<Point> for Standard {
     }
 }
 
-fn random_tuple() {
+pub fn random_tuple() {
     let mut rng = rand::thread_rng();
     
     let rand_tuple = rng.gen::<(i32, bool, f64)>();
@@ -94,7 +74,7 @@ fn random_tuple() {
 // Character distributions
 use rand::distributions::Alphanumeric;
 
-fn random_string(len:usize) {
+pub fn random_string(len:usize) {
     let rand_str: String = rand::thread_rng()
         .sample_iter(&Alphanumeric)
         .take(len)
@@ -104,7 +84,7 @@ fn random_string(len:usize) {
     println!("{}", rand_str);
 }
 
-fn random_password(len:usize) {
+pub fn random_password(len:usize) {
     let mut rng = rand::thread_rng();
     
     const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\

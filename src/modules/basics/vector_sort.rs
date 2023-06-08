@@ -1,15 +1,6 @@
-// Rust by Example Study Code
+// Sorting Vectors (Rust by Example)
 
-// 1.2 Algorithms - Sorting Vectors
-
-fn main () {
-    sort_int_vec();
-    sort_float_vec();
-    sort_struct_vec();
-}
-
-// Sort vectors
-fn sort_int_vec() {
+pub fn sort_int_vec() {
     let mut v = vec![1,5,10,2,6,4,19,12];
     
     v.sort();
@@ -17,7 +8,7 @@ fn sort_int_vec() {
     assert_eq!(v, vec![1,2,4,5,6,10,12,19]);
 }
 
-fn sort_float_vec() {
+pub fn sort_float_vec() {
     let mut v = vec![0.1, 0.9, 0.5, 0.4, 0.8, 0.2];
 
     v.sort_by(|a, b| a.partial_cmp(b).unwrap());
@@ -26,7 +17,7 @@ fn sort_float_vec() {
 }
 
 #[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
-struct Person {
+pub struct Person {
     name: String,
     age: u32,
 }
@@ -40,7 +31,7 @@ impl Person {
     }
 }
 
-fn sort_struct_vec() {
+pub fn sort_struct_vec() {
     let mut people = vec![
         Person::new("Zoe".to_string(), 25),
         Person::new("Al".to_string(), 60),
