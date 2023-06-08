@@ -1,6 +1,6 @@
 [package]
-name = "RustLearn"
-version = "0.1.0"
+name = "rust_code"
+version = "0.1.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -9,3 +9,12 @@ edition = "2021"
 rand = "0.8.5"
 rand_distr = "0.4.3"
 clap = "4.2.0"
+reqwest = {version="0.11", features=["json", "blocking", "gzip", "deflate"]}
+serde_json = "1.0"
+ndarray = "0.15.6"
+ndarray-rand = "0.14.0"
+ndarray-csv = "0.5.1"
+cute = "0.3.0"
+csv = "1.2.1"
+actix-web = "1.0.8"
+serde = {version = "1.0", features = ["derive"]}
